@@ -63,7 +63,7 @@ const SettingsPage: FC = () => {
             </MenuItem>
           </MenuItemLink>
           {/* pfee 暂时隐藏mcp */}
-          {!isPfeeShow && (
+          {isPfeeShow && (
             <MenuItemLink to="/settings/mcp">
               <MenuItem className={isRoute('/settings/mcp')}>
                 <CodeOutlined />
