@@ -10,7 +10,7 @@ import {
   SettingOutlined
 } from '@ant-design/icons'
 import { Navbar, NavbarCenter } from '@renderer/components/app/Navbar'
-import { isLocalAi } from '@renderer/config/env'
+import { isLocalAi, isPfeeShow } from '@renderer/config/env'
 import ModelSettings from '@renderer/pages/settings/ModelSettings/ModelSettings'
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -62,12 +62,16 @@ const SettingsPage: FC = () => {
               {t('settings.websearch.title')}
             </MenuItem>
           </MenuItemLink>
-          <MenuItemLink to="/settings/mcp">
-            <MenuItem className={isRoute('/settings/mcp')}>
-              <CodeOutlined />
-              {t('settings.mcp.title')}
-            </MenuItem>
-          </MenuItemLink>
+          {/* pfee 暂时隐藏mcp */}
+          {!isPfeeShow && (
+            <MenuItemLink to="/settings/mcp">
+              <MenuItem className={isRoute('/settings/mcp')}>
+                <CodeOutlined />
+                {t('settings.mcp.title')}
+              </MenuItem>
+            </MenuItemLink>
+          )}
+          {/* pfee 暂时隐藏mcp */}
           <MenuItemLink to="/settings/general">
             <MenuItem className={isRoute('/settings/general')}>
               <SettingOutlined />
@@ -98,12 +102,16 @@ const SettingsPage: FC = () => {
               {t('settings.data.title')}
             </MenuItem>
           </MenuItemLink>
-          <MenuItemLink to="/settings/about">
-            <MenuItem className={isRoute('/settings/about')}>
-              <InfoCircleOutlined />
-              {t('settings.about')}
-            </MenuItem>
-          </MenuItemLink>
+          {/* pfee 暂时隐藏about */}
+          {isPfeeShow && (
+            <MenuItemLink to="/settings/about">
+              <MenuItem className={isRoute('/settings/about')}>
+                <InfoCircleOutlined />
+                {t('settings.about')}
+              </MenuItem>
+            </MenuItemLink>
+          )}
+          {/* pfee 暂时隐藏about */}
         </SettingMenus>
         <SettingContent>
           <Routes>

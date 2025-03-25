@@ -123,16 +123,20 @@ const DataSettings: FC = () => {
   return (
     <Container>
       <MenuList>
-        {menuItems.map((item) => (
-          <ListItem
-            key={item.key}
-            title={t(item.title)}
-            active={menu === item.key}
-            onClick={() => setMenu(item.key)}
-            titleStyle={{ fontWeight: 500 }}
-            icon={item.icon}
-          />
-        ))}
+        {menuItems.map(
+          (item) =>
+            // pfee 暂时隐藏除本地外的数据源
+            item.key === 'data' && (
+              <ListItem
+                key={item.key}
+                title={t(item.title)}
+                active={menu === item.key}
+                onClick={() => setMenu(item.key)}
+                titleStyle={{ fontWeight: 500 }}
+                icon={item.icon}
+              />
+            )
+        )}
       </MenuList>
       <SettingContainer theme={theme} style={{ display: 'flex', flex: 1 }}>
         {menu === 'data' && (

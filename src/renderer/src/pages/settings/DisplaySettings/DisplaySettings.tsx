@@ -1,5 +1,6 @@
 import { SyncOutlined } from '@ant-design/icons'
 import { isMac } from '@renderer/config/constant'
+import { isPfeeShow } from '@renderer/config/env'
 import { DEFAULT_MIN_APPS } from '@renderer/config/minapps'
 import { useTheme } from '@renderer/context/ThemeProvider'
 import { useMinapps } from '@renderer/hooks/useMinapps'
@@ -177,40 +178,46 @@ const DisplaySettings: FC = () => {
           setDisabledIcons={setDisabledIcons}
         />
       </SettingGroup>
-      <SettingGroup theme={theme}>
-        <SettingTitle
-          style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span>{t('settings.display.minApp.title')}</span>
-          <ResetButtonWrapper>
-            <Button onClick={handleResetMinApps}>{t('common.reset')}</Button>
-          </ResetButtonWrapper>
-        </SettingTitle>
-        <SettingDivider />
-        <MiniAppIconsManager
-          visibleMiniApps={visibleMiniApps}
-          disabledMiniApps={disabledMiniApps}
-          setVisibleMiniApps={setVisibleMiniApps}
-          setDisabledMiniApps={setDisabledMiniApps}
-        />
-      </SettingGroup>
-      <SettingGroup theme={theme}>
-        <SettingTitle>
-          {t('settings.display.custom.css')}
-          <TitleExtra onClick={() => window.api.openWebsite('https://cherrycss.com/')}>
-            {t('settings.display.custom.css.cherrycss')}
-          </TitleExtra>
-        </SettingTitle>
-        <SettingDivider />
-        <Input.TextArea
-          value={customCss}
-          onChange={(e) => dispatch(setCustomCss(e.target.value))}
-          placeholder={t('settings.display.custom.css.placeholder')}
-          style={{
-            minHeight: 200,
-            fontFamily: 'monospace'
-          }}
-        />
-      </SettingGroup>
+      {/* pfee 隐藏小程序设置 和 自定义css设置 */}
+      {isPfeeShow && (
+        <>
+          <SettingGroup theme={theme}>
+            <SettingTitle
+              style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span>{t('settings.display.minApp.title')}</span>
+              <ResetButtonWrapper>
+                <Button onClick={handleResetMinApps}>{t('common.reset')}</Button>
+              </ResetButtonWrapper>
+            </SettingTitle>
+            <SettingDivider />
+            <MiniAppIconsManager
+              visibleMiniApps={visibleMiniApps}
+              disabledMiniApps={disabledMiniApps}
+              setVisibleMiniApps={setVisibleMiniApps}
+              setDisabledMiniApps={setDisabledMiniApps}
+            />
+          </SettingGroup>
+          <SettingGroup theme={theme}>
+            <SettingTitle>
+              {t('settings.display.custom.css')}
+              <TitleExtra onClick={() => window.api.openWebsite('https://cherrycss.com/')}>
+                {t('settings.display.custom.css.cherrycss')}
+              </TitleExtra>
+            </SettingTitle>
+            <SettingDivider />
+            <Input.TextArea
+              value={customCss}
+              onChange={(e) => dispatch(setCustomCss(e.target.value))}
+              placeholder={t('settings.display.custom.css.placeholder')}
+              style={{
+                minHeight: 200,
+                fontFamily: 'monospace'
+              }}
+            />
+          </SettingGroup>
+        </>
+      )}
+      {/* pfee 隐藏小程序设置 和 自定义css设置 */}
     </SettingContainer>
   )
 }
