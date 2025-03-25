@@ -279,7 +279,6 @@ export class WindowService {
       }
       // pfee 尾部添加一个 =
       details.requestHeaders.Cookie += '='
-      console.log('electron onBeforeSendHeaders', details.requestHeaders)
       callback({ requestHeaders: details.requestHeaders })
     })
     /* pfee 拦截请求头并添加 Cookie */
