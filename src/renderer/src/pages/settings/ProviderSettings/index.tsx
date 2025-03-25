@@ -220,6 +220,8 @@ const ProviderListContainer = styled.div`
   min-width: calc(var(--settings-width) + 10px);
   height: calc(100vh - var(--navbar-height));
   border-right: 0.5px solid var(--color-border);
+  /* pfee 隐藏搜索框 */
+  display: none;
 `
 
 const ProviderList = styled.div`
