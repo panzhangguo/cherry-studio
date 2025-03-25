@@ -6,7 +6,7 @@ import {
   TranslationOutlined
 } from '@ant-design/icons'
 import { isMac } from '@renderer/config/constant'
-import { AppLogo, UserAvatar } from '@renderer/config/env'
+import { AppLogo, isPfeeShow, UserAvatar } from '@renderer/config/env'
 import { useTheme } from '@renderer/context/ThemeProvider'
 import useAvatar from '@renderer/hooks/useAvatar'
 import { useMinapps } from '@renderer/hooks/useMinapps'
@@ -79,14 +79,19 @@ const Sidebar: FC = () => {
         )}
       </MainMenusContainer>
       <Menus>
-        <Tooltip title={t('docs.title')} mouseEnterDelay={0.8} placement="right">
-          <Icon
-            theme={theme}
-            onClick={onOpenDocs}
-            className={minappShow && MinApp.app?.url === 'https://docs.cherry-ai.com/' ? 'active' : ''}>
-            <QuestionCircleOutlined />
-          </Icon>
-        </Tooltip>
+        {/* pfee 关闭帮助文旦链接 */}
+        {isPfeeShow && (
+          <Tooltip title={t('docs.title')} mouseEnterDelay={0.8} placement="right">
+            <Icon
+              theme={theme}
+              onClick={onOpenDocs}
+              className={minappShow && MinApp.app?.url === 'https://docs.cherry-ai.com/' ? 'active' : ''}>
+              <QuestionCircleOutlined />
+            </Icon>
+          </Tooltip>
+        )}
+        {/* pfee 关闭帮助文旦链接 */}
+
         <Tooltip title={t('settings.theme.title')} mouseEnterDelay={0.8} placement="right">
           <Icon theme={theme} onClick={() => toggleTheme()}>
             {theme === 'dark' ? (

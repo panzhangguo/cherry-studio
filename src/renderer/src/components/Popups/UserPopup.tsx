@@ -1,14 +1,19 @@
+import { QuestionCircleOutlined } from '@ant-design/icons' // pfee 引入auth模块
 import DefaultAvatar from '@renderer/assets/images/avatar.png'
+import { EXPAND_CONFIG } from '@renderer/config/env'
 import useAvatar from '@renderer/hooks/useAvatar'
+import { useExpandAuth } from '@renderer/hooks/useExpandAuth' // pfee 引入auth模块
 import { useSettings } from '@renderer/hooks/useSettings'
 import ImageStorage from '@renderer/services/ImageStorage'
 import { useAppDispatch } from '@renderer/store'
 import { setAvatar } from '@renderer/store/runtime'
 import { setUserName } from '@renderer/store/settings'
 import { compressImage, isEmoji } from '@renderer/utils'
-import { Avatar, Dropdown, Input, Modal, Popover, Upload } from 'antd'
+import { defHttp } from '@renderer/utils/http/axios'
+import { Avatar, Button, Divider, Dropdown, Flex, Input, Modal, Popover, Tooltip, Upload } from 'antd'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom' // pfee 引入auth模块
 import styled from 'styled-components'
 
 import EmojiPicker from '../EmojiPicker'
@@ -27,7 +32,24 @@ const PopupContainer: React.FC<Props> = ({ resolve }) => {
   const { userName } = useSettings()
   const dispatch = useAppDispatch()
   const avatar = useAvatar()
+  /* pfee 引入auth模块 */
+  const navigate = useNavigate()
+  const { logout: authLogout, isLogin, username: authUsername } = useExpandAuth()
+  const toAuth = async (isSignup = false) => {
+    if (!isSignup && isLogin) {
+      await defHttp.get({
+        url: EXPAND_CONFIG.AuthApi.logout
+      })
 
+      authLogout()
+    } else {
+      setOpen(false)
+      navigate('/expand-auth', {
+        state: { isSignup: isSignup }
+      })
+    }
+  }
+  /* pfee 引入auth模块 */
   const onOk = () => {
     setOpen(false)
   }
@@ -121,7 +143,7 @@ const PopupContainer: React.FC<Props> = ({ resolve }) => {
 
   return (
     <Modal
-      width="300px"
+      width="600px" // pfee 修改宽度
       open={open}
       footer={null}
       onOk={onOk}
@@ -162,12 +184,36 @@ const PopupContainer: React.FC<Props> = ({ resolve }) => {
       <HStack alignItems="center" gap="10px" p="20px">
         <Input
           placeholder={t('settings.general.user_name.placeholder')}
-          value={userName}
+          disabled={isLogin} // pfee 登录后不允许修改用户名
+          value={authUsername || userName} // pfee 如果已经登录，则使用用户名，否则使用输入框的值
           onChange={(e) => dispatch(setUserName(e.target.value.trim()))}
           style={{ flex: 1, textAlign: 'center', width: '100%' }}
           maxLength={30}
         />
       </HStack>
+
+      {/* pfee 权限模块 */}
+      <Divider plain>
+        {!isLogin ? t('当前为游客模式，获取完整体验，请登录。') : t('当前账户已登录，畅游AI智能世界。')}
+      </Divider>
+      <Flex gap="small" wrap justify="center">
+        <Button color="default" variant="solid" onClick={() => toAuth(true)}>
+          {t('注册账号')}
+        </Button>
+        <Button color="purple" variant="solid" onClick={() => toAuth()}>
+          <Tooltip title={t('若账号过期，请退出重新登录')}>
+            <QuestionCircleOutlined />
+          </Tooltip>
+          {!isLogin ? t('登录') : t('退出登录')}
+        </Button>
+      </Flex>
+      <Divider plain>{t('settings.provider.charge')}</Divider>
+      <Flex justify="center">
+        <Button color="pink" disabled={true} variant="solid">
+          {t('settings.provider.charge')}
+        </Button>
+      </Flex>
+      {/* pfee 权限模块 */}
     </Modal>
   )
 }
