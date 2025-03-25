@@ -20,6 +20,13 @@ export class WindowService {
   private lastSelectedText: string = ''
   private contextMenu: Menu | null = null
 
+  // pfee 自定义cookie存储
+  private cookiesStore: Record<string, string> = {}
+  // 拦截响应头并处理 Set-Cookie
+  private cookieFilter = {
+    urls: ['http://127.0.0.1:3000/api/*', 'http://10.16.2.185:3000/api/*', 'http://111.231.8.34:3000/api/*']
+  }
+
   public static getInstance(): WindowService {
     if (!WindowService.instance) {
       WindowService.instance = new WindowService()
@@ -235,8 +242,47 @@ export class WindowService {
       if (details.responseHeaders?.['content-security-policy']) {
         delete details.responseHeaders['content-security-policy']
       }
+
+      /* pfee 拦截获取cookie */
+      const responseHeaders = details.responseHeaders || {}
+      for (const header of Object.keys(responseHeaders)) {
+        if (header.toLowerCase() === 'set-cookie') {
+          responseHeaders[header].forEach((cookie) => {
+            const cookieParts = cookie.split(';').map((part) => part.trim())
+            const cookieNameValue = cookieParts[0]
+            const [name, value] = cookieNameValue.split('=')
+            this.cookiesStore[name] = value
+          })
+
+          responseHeaders[header] = responseHeaders[header].map((cookie) =>
+            cookie
+              // .replace(/Secure/gi, '')
+              .replace(/HttpOnly/gi, '')
+              // pfee 添加替代同源策略
+              .replace(/Strict/gi, 'None')
+          )
+        }
+      }
+      /* pfee 拦截获取cookie */
+
       callback({ cancel: false, responseHeaders: details.responseHeaders })
     })
+
+    /* pfee 拦截请求头并添加 Cookie */
+    mainWindow.webContents.session.webRequest.onBeforeSendHeaders(this.cookieFilter, (details, callback) => {
+      let cookieString = ''
+      for (const [name, value] of Object.entries(this.cookiesStore)) {
+        cookieString += `${name}=${value}; `
+      }
+      if (cookieString.length > 0) {
+        details.requestHeaders.Cookie = cookieString.slice(0, -2) // Remove trailing semicolon and space
+      }
+      // pfee 尾部添加一个 =
+      details.requestHeaders.Cookie += '='
+      console.log('electron onBeforeSendHeaders', details.requestHeaders)
+      callback({ requestHeaders: details.requestHeaders })
+    })
+    /* pfee 拦截请求头并添加 Cookie */
   }
 
   private loadMainWindowContent(mainWindow: BrowserWindow) {
