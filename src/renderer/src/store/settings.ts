@@ -8,10 +8,10 @@ export type SidebarIcon = 'assistants' | 'agents' | 'paintings' | 'translate' | 
 
 export const DEFAULT_SIDEBAR_ICONS: SidebarIcon[] = [
   'assistants',
-  'agents',
+  // 'agents', // pfee隐藏智能体
   'paintings',
   'translate',
-  'minapp',
+  // 'minapp', // pfee隐藏小程序
   'knowledge',
   'files'
 ]
@@ -127,7 +127,7 @@ const initialState: SettingsState = {
   codeCollapsible: false,
   codeWrappable: false,
   mathEngine: 'KaTeX',
-  messageStyle: 'plain',
+  messageStyle: 'bubble', // pfee 默认使用 bubble
   codeStyle: 'auto',
   gridColumns: 2,
   gridPopoverTrigger: 'hover',

@@ -7,6 +7,7 @@ import agents from './agents'
 import assistants from './assistants'
 import backup from './backup'
 import copilot from './copilot'
+import expandAuth from './expandAuth' // pfee 添加后台权限
 import knowledge from './knowledge'
 import llm from './llm'
 import mcp from './mcp'
@@ -33,19 +34,30 @@ const rootReducer = combineReducers({
   websearch,
   mcp,
   copilot,
-  messages: messagesReducer
+  messages: messagesReducer,
+  expandAuth // pfee 添加后台权限
 })
 
-const persistedReducer = persistReducer(
-  {
-    key: 'cherry-studio',
-    storage,
-    version: 84,
-    blacklist: ['runtime', 'messages'],
-    migrate
-  },
-  rootReducer
-)
+/* pfee 将perisstconfig独立出来 */
+// const persistedReducer = persistReducer(
+//   {
+//     key: 'cherry-studio',
+//     storage,
+//     version: 84,
+//     blacklist: ['runtime', 'messages'],
+//     migrate
+//   },
+//   rootReducer
+// )
+export const persistConfig = {
+  key: 'winload-studio',
+  storage,
+  version: 84,
+  blacklist: ['runtime', 'messages'],
+  migrate
+}
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+/* pfee 将perisstconfig独立出来 */
 
 const store = configureStore({
   // @ts-ignore store type is unknown

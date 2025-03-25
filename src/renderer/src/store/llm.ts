@@ -33,8 +33,20 @@ export const INITIAL_PROVIDERS: Provider[] = [
     apiHost: 'https://api.siliconflow.cn',
     models: SYSTEM_MODELS.silicon,
     isSystem: true,
+    enabled: false // pfee 默认关闭硅基流动
+  },
+  /* pfee 测试阶段，添加一个默认为winload的服务模型  */
+  {
+    id: 'winload',
+    name: 'Winload',
+    type: 'openai',
+    apiKey: 'sk-GylROXP96KmvJWsCw9udSCv7s0XcCOaWs3sWgiXZ4A3CSOol',
+    apiHost: 'http://111.231.8.34:3000',
+    models: [],
+    isSystem: true,
     enabled: true
   },
+  /* pfee 测试阶段，添加一个默认为winload的服务模型 */
   {
     id: 'aihubmix',
     name: 'AiHubMix',
