@@ -1,0 +1,22 @@
+<svg width="1334" height="800" viewBox="0 0 1334 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <filter id="fq" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" width="1334" height="800" x="0" y="0">
+        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+        <feBlend in="SourceGraphic" in2="BackgroundImageFix" mode="normal" result="shape"/>
+        <feGaussianBlur result="effect1_foregroundBlur" stdDeviation="100"/>
+    </filter>
+    <g filter="url(#fq)">
+        <!-- <rect width="1334" height="800" fill="white"/> -->
+        <g id="Group 63">
+            <g id="Group 61">
+                <g id="Group 59_2">
+                    <circle id="Ellipse 44_2" cx="1179.12" cy="634.188" r="128.188" fill="#493AFF"/>
+                    <circle id="Ellipse 45_2" cx="1224.31" cy="762.812" r="128.188" fill="#962DFF"/>
+                    <circle id="Ellipse 46_2" cx="1306.88" cy="645.486" r="128.188" fill="#2C5BFF"/>
+                </g>
+                <g id="Ellipse 47_2" filter="url(#filter1_b_107_864)">
+                    <circle cx="1242.5" cy="698.5" r="379.5" fill="white" fill-opacity="0.6"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
