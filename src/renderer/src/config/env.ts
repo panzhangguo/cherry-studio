@@ -4,9 +4,6 @@ export { default as AppLogo } from '@renderer/assets/images/logo.png'
 export const APP_NAME = 'Winload Studio' // 修改环境文件APP_NAME
 export const isLocalAi = false
 
-// pfee 添加自定义环境变量
-export const isPfeeShow = false
-
 export const EXPAND_CONFIG = {
   API_URL: import.meta.env.DEV ? 'http://10.16.2.185:3000/api' : 'http://111.231.8.34:3000/api',
   UPLOAD_URL: import.meta.env.DEV ? 'http://10.16.2.185:3000/api' : 'http://111.231.8.34:3000/api',

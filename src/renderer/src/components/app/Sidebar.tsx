@@ -6,7 +6,8 @@ import {
   TranslationOutlined
 } from '@ant-design/icons'
 import { isMac } from '@renderer/config/constant'
-import { AppLogo, isPfeeShow, UserAvatar } from '@renderer/config/env'
+import { AppLogo, UserAvatar } from '@renderer/config/env'
+import { isDocsShow } from '@renderer/config/winload-progressive'
 import { useTheme } from '@renderer/context/ThemeProvider'
 import useAvatar from '@renderer/hooks/useAvatar'
 import { useMinapps } from '@renderer/hooks/useMinapps'
@@ -80,7 +81,7 @@ const Sidebar: FC = () => {
       </MainMenusContainer>
       <Menus>
         {/* pfee 关闭帮助文旦链接 */}
-        {isPfeeShow && (
+        {isDocsShow && (
           <Tooltip title={t('docs.title')} mouseEnterDelay={0.8} placement="right">
             <Icon
               theme={theme}

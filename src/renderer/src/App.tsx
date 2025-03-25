@@ -29,8 +29,8 @@ function App(): JSX.Element {
           <AntdProvider>
             <SyntaxHighlighterProvider>
               <PersistGate loading={null} persistor={persistor}>
-                <TopViewContainer>
-                  <HashRouter>
+                <HashRouter>
+                  <TopViewContainer>
                     <NavigationHandler />
                     <Sidebar />
                     <Routes>
@@ -44,8 +44,8 @@ function App(): JSX.Element {
                       <Route path="/settings/*" element={<SettingsPage />} />
                       <Route path="/expand-auth" element={<ExpandAuthPage />} />
                     </Routes>
-                  </HashRouter>
-                </TopViewContainer>
+                  </TopViewContainer>
+                </HashRouter>
               </PersistGate>
             </SyntaxHighlighterProvider>
           </AntdProvider>

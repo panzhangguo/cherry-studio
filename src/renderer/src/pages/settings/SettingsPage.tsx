@@ -10,7 +10,8 @@ import {
   SettingOutlined
 } from '@ant-design/icons'
 import { Navbar, NavbarCenter } from '@renderer/components/app/Navbar'
-import { isLocalAi, isPfeeShow } from '@renderer/config/env'
+import { isLocalAi } from '@renderer/config/env'
+import { isAboutShow, isMcpShow } from '@renderer/config/winload-progressive'
 import ModelSettings from '@renderer/pages/settings/ModelSettings/ModelSettings'
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -63,7 +64,7 @@ const SettingsPage: FC = () => {
             </MenuItem>
           </MenuItemLink>
           {/* pfee 暂时隐藏mcp */}
-          {isPfeeShow && (
+          {isMcpShow && (
             <MenuItemLink to="/settings/mcp">
               <MenuItem className={isRoute('/settings/mcp')}>
                 <CodeOutlined />
@@ -103,7 +104,7 @@ const SettingsPage: FC = () => {
             </MenuItem>
           </MenuItemLink>
           {/* pfee 暂时隐藏about */}
-          {isPfeeShow && (
+          {isAboutShow && (
             <MenuItemLink to="/settings/about">
               <MenuItem className={isRoute('/settings/about')}>
                 <InfoCircleOutlined />
