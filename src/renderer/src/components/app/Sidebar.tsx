@@ -36,7 +36,7 @@ const Sidebar: FC = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const { sidebarIcons } = useSettings()
-  const { theme, toggleTheme } = useTheme()
+  const { theme, settingTheme, toggleTheme } = useTheme()
   const { pinned } = useMinapps()
 
   const onEditUser = () => UserPopup.show()
