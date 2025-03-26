@@ -41,16 +41,6 @@ const rootReducer = combineReducers({
 })
 
 /* pfee 将perisstconfig独立出来 */
-// const persistedReducer = persistReducer(
-//   {
-//     key: 'cherry-studio',
-//     storage,
-//     version: 84,
-//     blacklist: ['runtime', 'messages'],
-//     migrate
-//   },
-//   rootReducer
-// )
 export const persistConfig = {
   key: 'winload-studio',
   storage,

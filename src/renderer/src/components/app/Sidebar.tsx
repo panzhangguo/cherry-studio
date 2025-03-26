@@ -92,8 +92,10 @@ const Sidebar: FC = () => {
           </Tooltip>
         )}
         {/* pfee 关闭帮助文旦链接 */}
-
-        <Tooltip title={t('settings.theme.title')} mouseEnterDelay={0.8} placement="right">
+        <Tooltip
+          title={t('settings.theme.title') + ': ' + t(`settings.theme.${settingTheme}`)}
+          mouseEnterDelay={0.8}
+          placement="right">
           <Icon theme={theme} onClick={() => toggleTheme()}>
             {theme === 'dark' ? (
               <i className="iconfont icon-theme icon-dark1" />
