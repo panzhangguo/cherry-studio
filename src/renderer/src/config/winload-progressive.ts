@@ -15,12 +15,15 @@ export const isMinAppShow = false
 // 自定义css
 export const isCustomCssShow = false
 
+// 头部更新按钮
+export const isShowUpdateAvailable = false
+
 // 测试使用默认的模型
 export const winloadProvider = {
   id: 'winload',
   name: 'Winload',
   type: 'openai' as ProviderType,
-  apiKey: 'sk-oHnHSkKqc42Oot8uGahqrlpma20yhynu90vLcQV6qEy1xBW9',
+  apiKey: 'sk-KEQzsNEp5EFSPBR8NIB8VTBwnrpHZbufaIVyR7xtjlhM2whv',
   apiHost: 'http://47.96.16.65:3000',
   models: [],
   isSystem: true,

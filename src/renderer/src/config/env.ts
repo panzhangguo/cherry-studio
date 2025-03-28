@@ -5,8 +5,8 @@ export const APP_NAME = 'Winload Studio' // 修改环境文件APP_NAME
 export const isLocalAi = false
 
 export const EXPAND_CONFIG = {
-  API_URL: import.meta.env.DEV ? 'http://10.16.2.185:3000/api' : 'http://111.231.8.34:3000/api',
-  UPLOAD_URL: import.meta.env.DEV ? 'http://10.16.2.185:3000/api' : 'http://111.231.8.34:3000/api',
+  API_URL: import.meta.env.DEV ? 'http://10.16.2.185:3000/api' : 'http://47.96.16.65:3000/api',
+  UPLOAD_URL: import.meta.env.DEV ? 'http://10.16.2.185:3000/api' : 'http://47.96.16.65:3000/api',
   urlPrefix: '',
   AuthApi: {
     //获取短信验证码的接口

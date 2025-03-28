@@ -1,4 +1,5 @@
 import { SyncOutlined } from '@ant-design/icons'
+import { isShowUpdateAvailable } from '@renderer/config/winload-progressive'
 import { useRuntime } from '@renderer/hooks/useRuntime'
 import { Button } from 'antd'
 import { FC } from 'react'
@@ -19,15 +20,17 @@ const UpdateAppButton: FC = () => {
 
   return (
     <Container>
-      <UpdateButton
-        className="nodrag"
-        onClick={() => window.api.showUpdateDialog()}
-        icon={<SyncOutlined />}
-        color="orange"
-        variant="outlined"
-        size="small">
-        {t('button.update_available')}
-      </UpdateButton>
+      {isShowUpdateAvailable && (
+        <UpdateButton
+          className="nodrag"
+          onClick={() => window.api.showUpdateDialog()}
+          icon={<SyncOutlined />}
+          color="orange"
+          variant="outlined"
+          size="small">
+          {t('button.update_available')}
+        </UpdateButton>
+      )}
     </Container>
   )
 }
