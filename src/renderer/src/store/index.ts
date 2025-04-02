@@ -44,7 +44,7 @@ const rootReducer = combineReducers({
 export const persistConfig = {
   key: 'winload-studio',
   storage,
-  version: 84,
+  version: 88,
   blacklist: ['runtime', 'messages'],
   migrate
 }

@@ -21,7 +21,8 @@ import KnowledgePage from './pages/knowledge/KnowledgePage'
 import PaintingsPage from './pages/paintings/PaintingsPage'
 import SettingsPage from './pages/settings/SettingsPage'
 import TranslatePage from './pages/translate/TranslatePage'
-function App(): JSX.Element {
+
+function App(): React.ReactElement {
   return (
     <Provider store={store}>
       <StyleSheetManager>
