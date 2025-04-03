@@ -2,6 +2,7 @@ import { DeleteOutlined, EditOutlined, PlusOutlined, SearchOutlined } from '@ant
 import { DragDropContext, Draggable, Droppable, DropResult } from '@hello-pangea/dnd'
 import Scrollbar from '@renderer/components/Scrollbar'
 import { getProviderLogo } from '@renderer/config/providers'
+import { isProviderListAndAddShow } from '@renderer/config/winload-progressive'
 import { useAllProviders, useProviders } from '@renderer/hooks/useProvider'
 import { Provider } from '@renderer/types'
 import { droppableReorder, generateColorFromChar, getFirstCharacter, uuid } from '@renderer/utils'
@@ -120,7 +121,7 @@ const ProvidersList: FC = () => {
 
   return (
     <Container className="selectable">
-      <ProviderListContainer>
+      <ProviderListContainer style={{ display: isProviderListAndAddShow ? 'block' : 'none' }}>
         <AddButtonWrapper>
           <Input
             type="text"
@@ -220,8 +221,6 @@ const ProviderListContainer = styled.div`
   min-width: calc(var(--settings-width) + 10px);
   height: calc(100vh - var(--navbar-height));
   border-right: 0.5px solid var(--color-border);
-  /* pfee 隐藏搜索框 */
-  display: none;
 `
 
 const ProviderList = styled.div`

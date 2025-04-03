@@ -473,9 +473,13 @@ export const INITIAL_PROVIDERS: Provider[] = [
 ]
 
 const initialState: LlmState = {
-  defaultModel: SYSTEM_MODELS.silicon[1],
-  topicNamingModel: SYSTEM_MODELS.silicon[2],
-  translateModel: SYSTEM_MODELS.silicon[3],
+  // defaultModel: SYSTEM_MODELS.silicon[1],
+  // topicNamingModel: SYSTEM_MODELS.silicon[2],
+  // translateModel: SYSTEM_MODELS.silicon[3],
+  /* pfee修改默认模型为winload */
+  defaultModel: winloadProvider.models[2],
+  topicNamingModel: winloadProvider.models[2],
+  translateModel: winloadProvider.models[3],
   providers: INITIAL_PROVIDERS,
   settings: {
     ollama: {

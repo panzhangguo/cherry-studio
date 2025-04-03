@@ -18,12 +18,16 @@ export const isCustomCssShow = false
 // 头部更新按钮
 export const isShowUpdateAvailable = false
 
+// 模型默认列表 添加
+export const isProviderListAndAddShow = false
+
 // 测试使用默认的模型
 export const winloadProvider = {
   id: 'winload',
   name: 'Winload',
   type: 'openai' as ProviderType,
-  apiKey: 'sk-KEQzsNEp5EFSPBR8NIB8VTBwnrpHZbufaIVyR7xtjlhM2whv',
+  isExtendShow: true,
+  apiKey: '',
   apiHost: 'http://47.96.16.65:3000',
   models: [
     {
