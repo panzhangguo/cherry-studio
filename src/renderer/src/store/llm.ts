@@ -3,6 +3,7 @@ import { isLocalAi } from '@renderer/config/env'
 import { SYSTEM_MODELS } from '@renderer/config/models'
 import { winloadProvider } from '@renderer/config/winload-progressive'
 import { Model, Provider } from '@renderer/types'
+import { IpcChannel } from '@shared/IpcChannel'
 import { uniqBy } from 'lodash'
 
 type LlmSettings = {
@@ -135,6 +136,16 @@ export const INITIAL_PROVIDERS: Provider[] = [
     apiKey: '',
     apiHost: 'https://cloud.infini-ai.com/maas',
     models: SYSTEM_MODELS.infini,
+    isSystem: true,
+    enabled: false
+  },
+  {
+    id: 'qiniu',
+    name: 'Qiniu',
+    type: 'openai',
+    apiKey: '',
+    apiHost: 'https://api.qnaigc.com',
+    models: SYSTEM_MODELS.qiniu,
     isSystem: true,
     enabled: false
   },
@@ -579,7 +590,7 @@ const settingsSlice = createSlice({
     },
     setDefaultModel: (state, action: PayloadAction<{ model: Model }>) => {
       state.defaultModel = action.payload.model
-      window.electron.ipcRenderer.send('miniwindow-reload')
+      window.electron.ipcRenderer.send(IpcChannel.MiniWindowReload)
     },
     setTopicNamingModel: (state, action: PayloadAction<{ model: Model }>) => {
       state.topicNamingModel = action.payload.model

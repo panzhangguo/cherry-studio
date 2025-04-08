@@ -8,7 +8,8 @@ import {
   MacCommandOutlined,
   RocketOutlined,
   SaveOutlined,
-  SettingOutlined
+  SettingOutlined,
+  ThunderboltOutlined
 } from '@ant-design/icons'
 import { Navbar, NavbarCenter } from '@renderer/components/app/Navbar'
 import { isLocalAi } from '@renderer/config/env'
@@ -30,6 +31,7 @@ import { McpSettingsNavbar } from './MCPSettings/McpSettingsNavbar'
 import MiniAppSettings from './MiniappSettings/MiniAppSettings'
 import ProvidersList from './ProviderSettings'
 import QuickAssistantSettings from './QuickAssistantSettings'
+import QuickPhraseSettings from './QuickPhraseSettings'
 import ShortcutSettings from './ShortcutSettings'
 import WebSearchSettings from './WebSearchSettings'
 
@@ -113,6 +115,12 @@ const SettingsPage: FC = () => {
               {t('settings.quickAssistant.title')}
             </MenuItem>
           </MenuItemLink>
+          <MenuItemLink to="/settings/quickPhrase">
+            <MenuItem className={isRoute('/settings/quickPhrase')}>
+              <ThunderboltOutlined />
+              {t('settings.quickPhrase.title')}
+            </MenuItem>
+          </MenuItemLink>
           <MenuItemLink to="/settings/data">
             <MenuItem className={isRoute('/settings/data')}>
               <SaveOutlined />
@@ -143,6 +151,7 @@ const SettingsPage: FC = () => {
             <Route path="quickAssistant" element={<QuickAssistantSettings />} />
             <Route path="data/*" element={<DataSettings />} />
             <Route path="about" element={<AboutSettings />} />
+            <Route path="quickPhrase" element={<QuickPhraseSettings />} />
           </Routes>
         </SettingContent>
       </ContentContainer>

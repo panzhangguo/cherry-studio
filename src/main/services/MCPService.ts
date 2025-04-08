@@ -2,11 +2,13 @@ import os from 'node:os'
 import path from 'node:path'
 
 import { isLinux, isMac, isWin } from '@main/constant'
+import { createInMemoryMCPServer } from '@main/mcpServers/factory'
 import { makeSureDirExists } from '@main/utils'
 import { getBinaryName, getBinaryPath } from '@main/utils/process'
 import { Client } from '@modelcontextprotocol/sdk/client/index.js'
 import { SSEClientTransport } from '@modelcontextprotocol/sdk/client/sse.js'
 import { getDefaultEnvironment, StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
+import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory'
 import { nanoid } from '@reduxjs/toolkit'
 import { MCPServer, MCPTool } from '@types'
 import { app } from 'electron'
@@ -44,28 +46,46 @@ class McpService {
     // Check if we already have a client for this server configuration
     const existingClient = this.clients.get(serverKey)
     if (existingClient) {
-      // Check if the existing client is still connected
-      const pingResult = await existingClient.ping()
-      Logger.info(`[MCP] Ping result for ${server.name}:`, pingResult)
-      // If the ping fails, remove the client from the cache
-      // and create a new one
-      if (!pingResult) {
+      try {
+        // Check if the existing client is still connected
+        const pingResult = await existingClient.ping()
+        Logger.info(`[MCP] Ping result for ${server.name}:`, pingResult)
+        // If the ping fails, remove the client from the cache
+        // and create a new one
+        if (!pingResult) {
+          this.clients.delete(serverKey)
+        } else {
+          return existingClient
+        }
+      } catch (error) {
+        Logger.error(`[MCP] Error pinging server ${server.name}:`, error)
         this.clients.delete(serverKey)
-      } else {
-        return existingClient
       }
     }
-
     // Create new client instance for each connection
     const client = new Client({ name: 'Cherry Studio', version: app.getVersion() }, { capabilities: {} })
 
     const args = [...(server.args || [])]
 
-    let transport: StdioClientTransport | SSEClientTransport
+    let transport: StdioClientTransport | SSEClientTransport | InMemoryTransport
 
     try {
       // Create appropriate transport based on configuration
-      if (server.baseUrl) {
+      if (server.type === 'inMemory') {
+        Logger.info(`[MCP] Using in-memory transport for server: ${server.name}`)
+        const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair()
+        // start the in-memory server with the given name and environment variables
+        const inMemoryServer = createInMemoryMCPServer(server.name, args, server.env || {})
+        try {
+          await inMemoryServer.connect(serverTransport)
+          Logger.info(`[MCP] In-memory server started: ${server.name}`)
+        } catch (error) {
+          Logger.error(`[MCP] Error starting in-memory server: ${error}`)
+          throw new Error(`Failed to start in-memory server: ${error}`)
+        }
+        // set the client transport to the client
+        transport = clientTransport
+      } else if (server.baseUrl) {
         transport = new SSEClientTransport(new URL(server.baseUrl))
       } else if (server.command) {
         let cmd = server.command
@@ -90,10 +110,10 @@ class McpService {
             }
 
             // if the server name is mcp-auto-install, use the mcp-registry.json file in the bin directory
-            if (server.name === 'mcp-auto-install') {
+            if (server.name.includes('mcp-auto-install')) {
               const binPath = await getBinaryPath()
               makeSureDirExists(binPath)
-              server.env.MCP_REGISTRY_PATH = path.join(binPath, 'mcp-registry.json')
+              server.env.MCP_REGISTRY_PATH = path.join(binPath, '..', 'config', 'mcp-registry.json')
             }
           }
         } else if (server.command === 'uvx' || server.command === 'uv') {
