@@ -1,5 +1,5 @@
-appId: com.pfee.WinloadStudio
-productName: Winload Studio # pfee 修改产品名称
+appId: com.pfee.ACFX
+productName: ACFX # pfee 修改产品名称
 directories:
   buildResources: build
 files:
@@ -77,8 +77,8 @@ publish:
   # provider: generic
   # url: https://cherrystudio.ocool.online
   provider: github
-  repo: cherry-studio
-  owner: CherryHQ
+  repo: acfx #pfee
+  owner: acfx #pfee
 electronDownload:
   mirror: https://npmmirror.com/mirrors/electron/
 afterPack: scripts/after-pack.js

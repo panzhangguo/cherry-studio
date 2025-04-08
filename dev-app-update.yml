@@ -1,8 +1,8 @@
 # provider: generic
 # url: http://127.0.0.1:8080
 # updaterCacheDirName: cherry-studio-updater
-provider: github
-repo: cherry-studio
-owner: kangfenmao
+# provider: github #pfee 移除更新配置
+# repo: cherry-studio #pfee 移除更新配置
+# owner: kangfenmao #pfee 移除更新配置
 # provider: generic
 # url: https://cherrystudio.ocool.online

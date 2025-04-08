@@ -73,7 +73,7 @@ export default abstract class BaseProvider {
   public defaultHeaders() {
     return {
       // 'HTTP-Referer': 'https://cherry-ai.com', // pfee 注释cherry
-      'X-Title': 'Winload Studio', // pfee 修改x-title
+      'X-Title': 'ACFX', // pfee 修改x-title
       'X-Api-Key': this.apiKey
     }
   }

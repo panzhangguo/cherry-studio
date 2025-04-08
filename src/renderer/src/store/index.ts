@@ -42,7 +42,7 @@ const rootReducer = combineReducers({
 
 /* pfee 将perisstconfig独立出来 */
 export const persistConfig = {
-  key: 'cherry-studio',
+  key: 'acfx',
   storage,
   version: 91,
   blacklist: ['runtime', 'messages'],
