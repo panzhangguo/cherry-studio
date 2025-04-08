@@ -11,10 +11,10 @@ export type SidebarIcon = 'assistants' | 'agents' | 'paintings' | 'translate' | 
 
 export const DEFAULT_SIDEBAR_ICONS: SidebarIcon[] = [
   'assistants',
-  // 'agents', // pfee隐藏智能体
+  'agents',
   'paintings',
   'translate',
-  // 'minapp', // pfee隐藏小程序
+  'minapp',
   'knowledge',
   'files'
 ]

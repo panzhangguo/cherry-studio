@@ -7,7 +7,7 @@ import agents from './agents'
 import assistants from './assistants'
 import backup from './backup'
 import copilot from './copilot'
-import expandAuth from './expandAuth' // pfee 添加后台权限
+import axfcAuth from './axfcAuth' // pfee 添加后台权限
 import knowledge from './knowledge'
 import llm from './llm'
 import mcp from './mcp'
@@ -37,7 +37,7 @@ const rootReducer = combineReducers({
   mcp,
   copilot,
   messages: messagesReducer,
-  expandAuth // pfee 添加后台权限
+  axfcAuth // pfee 添加后台权限
 })
 
 /* pfee 将perisstconfig独立出来 */

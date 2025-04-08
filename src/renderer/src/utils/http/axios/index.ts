@@ -4,7 +4,7 @@
 import { EXPAND_CONFIG } from '@renderer/config/env'
 import i18n from '@renderer/i18n'
 import { deepMerge } from '@renderer/utils/copy'
-import { getTenantId, getToken } from '@renderer/utils/expand/auth'
+import { getAxfxUserId } from '@renderer/utils/expand/auth'
 // import { useErrorLogStoreWithOut } from '@renderer/store/modules/errorLog'
 // import { useUserStoreWithOut } from '@renderer/store/modules/user'
 import type { AxiosResponse } from 'axios'
@@ -134,64 +134,9 @@ const transform: AxiosTransform = {
    */
   requestInterceptors: async (config: Recordable, options) => {
     // 请求之前处理config
-    const token = await getToken()
-    let tenantId = await getTenantId()
-    //update-begin---author:wangshuai---date:2024-04-16---for:【QQYUN-9005】发送短信加签。解决没有token无法加签---
-    // 将签名和时间戳，添加在请求接口 Header
-    // config.headers[ConfigEnum.TIMESTAMP] = signMd5Utils.getTimestamp()
-    //update-begin---author:wangshuai---date:2024-04-25---for: 生成签名的时候复制一份，避免影响原来的参数---
-    // config.headers[ConfigEnum.Sign] = signMd5Utils.getSign(config.url, cloneDeep(config.params), cloneDeep(config.data))
-    //update-end---author:wangshuai---date:2024-04-25---for: 生成签名的时候复制一份，避免影响原来的参数---
-    //update-end---author:wangshuai---date:2024-04-16---for:【QQYUN-9005】发送短信加签。解决没有token无法加签---
-    // update-begin--author:liaozhiyang---date:20240509---for：【issues/1220】登录时，vue3版本不加载字典数据设置无效
-    //--update-begin--author:liusq---date:20220325---for: 增加vue3标记
-    // config.headers[ConfigEnum.VERSION] = 'v3'
-    //--update-end--author:liusq---date:20220325---for:增加vue3标记
-    // update-end--author:liaozhiyang---date:20240509---for：【issues/1220】登录时，vue3版本不加载字典数据设置无效
-
-    config.headers['New-Api-User'] = 2
-
+    config.headers['New-Api-User'] = await getAxfxUserId()
     // 添加一个标记，用于判断是否是AI Studio加载的
     config.headers[ConfigEnum.IS_WINLOAD_AI_STUDIO] = true
-
-    if (token && (config as Recordable)?.requestOptions?.withToken !== false) {
-      // jwt token
-      config.headers.Authorization = options.authenticationScheme ? `${options.authenticationScheme} ${token}` : token
-      config.headers[ConfigEnum.TOKEN] = token
-
-      // 将签名和时间戳，添加在请求接口 Header
-      //config.headers[ConfigEnum.TIMESTAMP] = signMd5Utils.getTimestamp();
-      //config.headers[ConfigEnum.Sign] = signMd5Utils.getSign(config.url, config.params);
-      if (!tenantId) {
-        tenantId = 0
-      }
-
-      // update-begin--author:sunjianlei---date:220230428---for：【QQYUN-5279】修复分享的应用租户和当前登录租户不一致时，提示404的问题
-      // const userStore = useUserStoreWithOut()
-      // // 判断是否有临时租户id
-      // if (userStore.hasShareTenantId && userStore.shareTenantId !== 0) {
-      //   // 临时租户id存在，使用临时租户id
-      //   tenantId = userStore.shareTenantId!
-      // }
-      // update-end--author:sunjianlei---date:220230428---for：【QQYUN-5279】修复分享的应用租户和当前登录租户不一致时，提示404的问题
-
-      config.headers[ConfigEnum.TENANT_ID] = tenantId
-      //--update-end--author:liusq---date:20211105---for:将多租户id，添加在请求接口 Header
-
-      // ========================================================================================
-      // update-begin--author:sunjianlei---date:20220624--for: 添加低代码应用ID
-      // const routeParams = router.currentRoute.value.params
-      // if (routeParams.appId) {
-      //   config.headers[ConfigEnum.X_LOW_APP_ID] = routeParams.appId
-      //   // lowApp自定义筛选条件
-      //   if (routeParams.lowAppFilter) {
-      //     config.params = { ...config.params, ...JSON.parse(routeParams.lowAppFilter as string) }
-      //     delete routeParams.lowAppFilter
-      //   }
-      // }
-      // update-end--author:sunjianlei---date:20220624--for: 添加低代码应用ID
-      // ========================================================================================
-    }
     return config
   },
 

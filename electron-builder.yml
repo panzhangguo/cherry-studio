@@ -31,7 +31,7 @@ asarUnpack:
   - resources/**
   - '**/*.{node,dll,metal,exp,lib}'
 win:
-  executableName: Cherry Studio
+  executableName: ACFX #pfee 修改名称
   artifactName: ${productName}-${version}-${arch}-setup.${ext}
   target:
     - target: nsis

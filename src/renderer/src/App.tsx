@@ -14,7 +14,7 @@ import { ThemeProvider } from './context/ThemeProvider'
 import NavigationHandler from './handler/NavigationHandler'
 import AgentsPage from './pages/agents/AgentsPage'
 import AppsPage from './pages/apps/AppsPage'
-import ExpandAuthPage from './pages/expandAuth/ExpandAuthPage' // pfee 引入auth模块
+import AcfxAuthPage from './pages/acfxAuth/AcfxAuthPage' // pfee 引入auth模块
 import FilesPage from './pages/files/FilesPage'
 import HomePage from './pages/home/HomePage'
 import KnowledgePage from './pages/knowledge/KnowledgePage'
@@ -43,7 +43,7 @@ function App(): React.ReactElement {
                       <Route path="/knowledge" element={<KnowledgePage />} />
                       <Route path="/apps" element={<AppsPage />} />
                       <Route path="/settings/*" element={<SettingsPage />} />
-                      <Route path="/expand-auth" element={<ExpandAuthPage />} />
+                      <Route path="/acfx-auth" element={<AcfxAuthPage />} />
                     </Routes>
                   </TopViewContainer>
                 </HashRouter>

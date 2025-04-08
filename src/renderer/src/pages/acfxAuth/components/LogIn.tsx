@@ -22,7 +22,7 @@ const LogIn: React.FC<SignUpProps> = ({ setSignupVisible }) => {
   const [isLogining, setLogining] = useState(false)
   const [messageApi, contextHolder] = message.useMessage()
   const navigate = useNavigate()
-  const { login, username } = useExpandAuth()
+  const { login, user } = useExpandAuth()
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     setLogining(true)
     messageApi.open({
@@ -66,7 +66,7 @@ const LogIn: React.FC<SignUpProps> = ({ setSignupVisible }) => {
           wrapperCol={{ flex: 1 }}
           colon={false}
           onFinish={onFinish}
-          initialValues={{ username: username, password: '' }}
+          initialValues={{ username: user?.username, password: '' }}
           style={{ maxWidth: 600 }}>
           <Form.Item name="username" rules={[{ required: true, message: t('用户名不能为空') }]}>
             <Input autoFocus placeholder={t('用户名')} />

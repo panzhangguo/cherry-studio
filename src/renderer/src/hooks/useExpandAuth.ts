@@ -1,11 +1,9 @@
 import { useAppDispatch, useAppSelector } from '@renderer/store'
-import { ExpandAuthState, setSessionStatus, setTenant, setToken, setUserName } from '@renderer/store/expandAuth'
-
+import { setAcfxSessionTimeOut, setAcfxUser } from '@renderer/store/axfcAuth'
+import type { AcfxUserInfo } from '@renderer/store/axfcAuth'
 export function useExpandAuth() {
-  const token = useAppSelector((state) => state.expandAuth.token)
-  const isLogin = useAppSelector((state) => state.expandAuth.isSessionTimeOut === true)
-  const username = useAppSelector((state) => state.expandAuth.username)
-  const tenant = useAppSelector((state) => state.expandAuth.tenant)
+  const user = useAppSelector((state) => state.axfcAuth.user)
+  const isLogin = useAppSelector((state) => state.axfcAuth.isSessionTimeOut === false)
   const dispatch = useAppDispatch()
 
   /**
@@ -13,28 +11,21 @@ export function useExpandAuth() {
    *
    * @param data
    */
-  const login = (data: ExpandAuthState) => {
-    const { token, username, tenant } = data
-    dispatch(setToken(token))
-    dispatch(setUserName(username))
-    dispatch(setTenant(tenant))
-    dispatch(setSessionStatus(true))
+  const login = (user: AcfxUserInfo) => {
+    dispatch(setAcfxUser(user))
+    dispatch(setAcfxSessionTimeOut(false))
   }
 
   /**
    * 退出登录
    */
   const logout = () => {
-    dispatch(setToken(''))
-    dispatch(setUserName(''))
-    dispatch(setTenant(''))
-    dispatch(setSessionStatus(false))
+    dispatch(setAcfxUser(null))
+    dispatch(setAcfxSessionTimeOut(true))
   }
 
   return {
-    username,
-    tenant,
-    token,
+    user,
     isLogin,
     logout,
     login

@@ -1,6 +1,6 @@
 import i18n from '@renderer/i18n'
 import store from '@renderer/store'
-import { setSessionStatus, setToken } from '@renderer/store/expandAuth'
+import { setAcfxSessionTimeOut } from '@renderer/store/axfcAuth'
 
 import { ErrorMessageMode } from './types'
 export function checkStatus(status: number, msg: string, errorMessageMode: ErrorMessageMode = 'message'): void {
@@ -15,8 +15,7 @@ export function checkStatus(status: number, msg: string, errorMessageMode: Error
     // Return to the current page after successful login. This step needs to be operated on the login page.
     case 401:
       errMessage = msg || t('用户没有权限（令牌、用户名、密码错误）!')
-      store.dispatch(setToken(''))
-      store.dispatch(setSessionStatus(false))
+      store.dispatch(setAcfxSessionTimeOut(true))
       break
     case 403:
       errMessage = t('用户得到授权，但是访问是被禁止的!')

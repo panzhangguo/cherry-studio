@@ -34,7 +34,7 @@ const PopupContainer: React.FC<Props> = ({ resolve }) => {
   const avatar = useAvatar()
   /* pfee 引入auth模块 */
   const navigate = useNavigate()
-  const { logout: authLogout, isLogin, username: authUsername } = useExpandAuth()
+  const { logout: authLogout, isLogin, user } = useExpandAuth()
   const toAuth = async (isSignup = false) => {
     if (!isSignup && isLogin) {
       await defHttp.get({
@@ -44,7 +44,7 @@ const PopupContainer: React.FC<Props> = ({ resolve }) => {
       authLogout()
     } else {
       setOpen(false)
-      navigate('/expand-auth', {
+      navigate('/acfx-auth', {
         state: { isSignup: isSignup }
       })
     }
@@ -185,7 +185,7 @@ const PopupContainer: React.FC<Props> = ({ resolve }) => {
         <Input
           placeholder={t('settings.general.user_name.placeholder')}
           disabled={isLogin} // pfee 登录后不允许修改用户名
-          value={authUsername || userName} // pfee 如果已经登录，则使用用户名，否则使用输入框的值
+          value={user?.display_name || user?.username || userName} // pfee 如果已经登录，则使用用户名，否则使用输入框的值
           onChange={(e) => dispatch(setUserName(e.target.value.trim()))}
           style={{ flex: 1, textAlign: 'center', width: '100%' }}
           maxLength={30}

@@ -6,15 +6,8 @@ export async function getAuthCache() {
 }
 
 /**
- * 获取token
+ * 获取userid
  */
-export async function getToken() {
-  return (await getAuthCache())?.expandAuth.token
-}
-
-/**
- * 获取租户id
- */
-export async function getTenantId() {
-  return (await getAuthCache())?.expandAuth.tenant
+export async function getAxfxUserId() {
+  return (await getAuthCache())?.axfcAuth.user?.id
 }
