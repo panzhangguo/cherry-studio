@@ -10,7 +10,7 @@ export const isAboutShow = false
 export const isDocsShow = false
 
 // 小程序
-export const isMinAppShow = false
+export const isAcfxMinAppShow = false
 
 // 自定义css
 export const isCustomCssShow = false

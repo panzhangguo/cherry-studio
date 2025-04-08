@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 
 import { SidebarIcon } from '../../../store/settings'
+import { isAcfxMinAppShow } from '@renderer/config/winload-progressive'
 
 interface SidebarIconsManagerProps {
   visibleIcons: SidebarIcon[]
@@ -130,23 +131,25 @@ const SidebarIconsManager: FC<SidebarIconsManagerProps> = ({
           <Droppable droppableId="visible">
             {(provided: DroppableProvided) => (
               <IconList ref={provided.innerRef} {...provided.droppableProps}>
-                {visibleIcons.map((icon, index) => (
-                  <Draggable key={icon} draggableId={icon} index={index}>
-                    {(provided: DraggableProvided) => (
-                      <IconItem ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                        <IconContent>
-                          {renderIcon(icon)}
-                          <span>{t(`${icon}.title`)}</span>
-                        </IconContent>
-                        {icon !== 'assistants' && (
-                          <CloseButton onClick={() => onMoveIcon(icon, 'visible')}>
-                            <CloseOutlined />
-                          </CloseButton>
-                        )}
-                      </IconItem>
-                    )}
-                  </Draggable>
-                ))}
+                {visibleIcons
+                  .filter((icon) => (icon === 'minapp' ? isAcfxMinAppShow : true))
+                  .map((icon, index) => (
+                    <Draggable key={icon} draggableId={icon} index={index}>
+                      {(provided: DraggableProvided) => (
+                        <IconItem ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                          <IconContent>
+                            {renderIcon(icon)}
+                            <span>{t(`${icon}.title`)}</span>
+                          </IconContent>
+                          {icon !== 'assistants' && (
+                            <CloseButton onClick={() => onMoveIcon(icon, 'visible')}>
+                              <CloseOutlined />
+                            </CloseButton>
+                          )}
+                        </IconItem>
+                      )}
+                    </Draggable>
+                  ))}
                 {provided.placeholder}
               </IconList>
             )}

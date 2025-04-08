@@ -13,7 +13,7 @@ import {
 } from '@ant-design/icons'
 import { Navbar, NavbarCenter } from '@renderer/components/app/Navbar'
 import { isLocalAi } from '@renderer/config/env'
-import { isAboutShow, isMcpShow } from '@renderer/config/winload-progressive'
+import { isAboutShow, isAcfxMinAppShow, isMcpShow } from '@renderer/config/winload-progressive'
 import { useSidebarIconShow } from '@renderer/hooks/useSidebarIcon'
 import ModelSettings from '@renderer/pages/settings/ModelSettings/ModelSettings'
 // 导入useAppSelector
@@ -39,7 +39,7 @@ const SettingsPage: FC = () => {
   const { pathname } = useLocation()
   const { t } = useTranslation()
 
-  const showMiniAppSettings = useSidebarIconShow('minapp')
+  const showMiniAppSettings = isAcfxMinAppShow && useSidebarIconShow('minapp') // pfee 隐藏设置页面小程序
 
   const isRoute = (path: string): string => (pathname.startsWith(path) ? 'active' : '')
 
