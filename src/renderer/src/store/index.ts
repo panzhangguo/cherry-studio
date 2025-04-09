@@ -5,9 +5,9 @@ import storage from 'redux-persist/lib/storage'
 
 import agents from './agents'
 import assistants from './assistants'
+import axfcAuth from './axfcAuth' // pfee 添加后台权限
 import backup from './backup'
 import copilot from './copilot'
-import axfcAuth from './axfcAuth' // pfee 添加后台权限
 import knowledge from './knowledge'
 import llm from './llm'
 import mcp from './mcp'
@@ -44,7 +44,7 @@ const rootReducer = combineReducers({
 export const persistConfig = {
   key: 'acfx',
   storage,
-  version: 91,
+  version: 92,
   blacklist: ['runtime', 'messages'],
   migrate
 }
