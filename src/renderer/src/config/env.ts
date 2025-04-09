@@ -1,10 +1,11 @@
 export { default as UserAvatar } from '@renderer/assets/images/avatar.png'
 export { default as AppLogo } from '@renderer/assets/images/logo.png'
 
-export const APP_NAME = '奥晨分享 ACFX' // 修改环境文件APP_NAME
+export const APP_NAME = '奥晨分享 ACFX'
 export const isLocalAi = false
 
-export const EXPAND_CONFIG = {
+export const ACFX_CONFIG = {
+  REMOTE_URL: 'http://47.96.16.65:3000',
   API_URL: import.meta.env.DEV ? 'http://localhost:3000/api' : 'http://47.96.16.65:3000/api',
   UPLOAD_URL: import.meta.env.DEV ? 'http://localhost:3000/api' : 'http://47.96.16.65:3000/api',
   urlPrefix: '',

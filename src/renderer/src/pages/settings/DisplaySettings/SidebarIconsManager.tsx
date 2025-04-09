@@ -8,6 +8,7 @@ import {
   DroppableProvided,
   DropResult
 } from '@hello-pangea/dnd'
+import { isAcfxMinAppShow } from '@renderer/config/acfx-progressive'
 import { useAppDispatch } from '@renderer/store'
 import { setSidebarIcons } from '@renderer/store/settings'
 import { message } from 'antd'
@@ -16,7 +17,6 @@ import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 
 import { SidebarIcon } from '../../../store/settings'
-import { isAcfxMinAppShow } from '@renderer/config/winload-progressive'
 
 interface SidebarIconsManagerProps {
   visibleIcons: SidebarIcon[]

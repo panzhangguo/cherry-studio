@@ -1,6 +1,6 @@
 import { SyncOutlined } from '@ant-design/icons'
+import { isCustomCssShow } from '@renderer/config/acfx-progressive'
 import { isMac } from '@renderer/config/constant'
-import { isCustomCssShow } from '@renderer/config/winload-progressive'
 import { useTheme } from '@renderer/context/ThemeProvider'
 import { useSettings } from '@renderer/hooks/useSettings'
 import { useAppDispatch } from '@renderer/store'
@@ -164,7 +164,7 @@ const DisplaySettings: FC = () => {
           setDisabledIcons={setDisabledIcons}
         />
       </SettingGroup>
-      {/* pfee 隐藏小程序设置 和 自定义css设置 */}
+      {/* pfee小程序 隐藏设置 和 自定义css设置 */}
       <SettingGroup theme={theme} style={{ display: isCustomCssShow ? 'block' : 'none' }}>
         <SettingTitle>
           {t('settings.display.custom.css')}
@@ -183,7 +183,7 @@ const DisplaySettings: FC = () => {
           }}
         />
       </SettingGroup>
-      {/* pfee 隐藏小程序设置 和 自定义css设置 */}
+      {/* pfee程序 隐藏小设置 和 自定义css设置 */}
     </SettingContainer>
   )
 }

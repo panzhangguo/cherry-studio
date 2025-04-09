@@ -1,7 +1,7 @@
 // axios配置  可自行根据项目进行更改，只需更改该文件即可，其他文件可以不动
 // The axios configuration can be changed according to the project, just change the file, other files can be left unchanged
 
-import { EXPAND_CONFIG } from '@renderer/config/env'
+import { ACFX_CONFIG } from '@renderer/config/env'
 import i18n from '@renderer/i18n'
 import { deepMerge } from '@renderer/utils/copy'
 import { getAxfxUserId } from '@renderer/utils/expand/auth'
@@ -18,7 +18,7 @@ import { formatRequestDate, joinTimestamp } from './helper'
 import { Recordable, RequestOptions, Result } from './types'
 import { setObjToUrlParams } from './utils'
 
-const urlPrefix = EXPAND_CONFIG.urlPrefix
+const urlPrefix = ACFX_CONFIG.urlPrefix
 
 /**
  * @description: 数据处理，方便区分多种处理方式
@@ -221,7 +221,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           // 成功消息提示类型
           successMessageMode: 'success',
           // 接口地址
-          apiUrl: EXPAND_CONFIG.API_URL,
+          apiUrl: ACFX_CONFIG.API_URL,
           // 接口拼接地址
           urlPrefix: urlPrefix,
           //  是否加入时间戳

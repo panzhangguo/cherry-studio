@@ -5,9 +5,9 @@ import {
   QuestionCircleOutlined,
   TranslationOutlined
 } from '@ant-design/icons'
+import { isAcfxMinAppShow, isDocsShow } from '@renderer/config/acfx-progressive'
 import { isMac } from '@renderer/config/constant'
 import { AppLogo, UserAvatar } from '@renderer/config/env'
-import { isAcfxMinAppShow, isDocsShow } from '@renderer/config/winload-progressive'
 import { useTheme } from '@renderer/context/ThemeProvider'
 import useAvatar from '@renderer/hooks/useAvatar'
 import { useMinappPopup } from '@renderer/hooks/useMinappPopup'
@@ -157,7 +157,7 @@ const MainMenus: FC = () => {
   }
 
   return sidebarIcons.visible
-    .filter((icon) => (icon === 'minapp' ? isAcfxMinAppShow : true)) // pfee 隐藏小程序
+    .filter((icon) => (icon === 'minapp' ? isAcfxMinAppShow : true)) // pfee小程序 隐藏
     .map((icon) => {
       const path = pathMap[icon]
       const isActive = path === '/' ? isRoute(path) : isRoutes(path)

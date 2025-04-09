@@ -1,8 +1,8 @@
 import { DeleteOutlined, EditOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import { DragDropContext, Draggable, Droppable, DropResult } from '@hello-pangea/dnd'
 import Scrollbar from '@renderer/components/Scrollbar'
+import { isProviderListAndAddShow } from '@renderer/config/acfx-progressive'
 import { getProviderLogo } from '@renderer/config/providers'
-import { isProviderListAndAddShow } from '@renderer/config/winload-progressive'
 import { useAllProviders, useProviders } from '@renderer/hooks/useProvider'
 import { Provider } from '@renderer/types'
 import { droppableReorder, generateColorFromChar, getFirstCharacter, uuid } from '@renderer/utils'
@@ -17,9 +17,9 @@ import ProviderSetting from './ProviderSetting'
 const ProvidersList: FC = () => {
   const providers = useAllProviders()
   const { updateProviders, addProvider, removeProvider, updateProvider } = useProviders()
-  const [selectedProvider, setSelectedProvider] = useState<Provider>(providers[1]) // pfee 默认修改为 providers[1] winload
+  const [selectedProvider, setSelectedProvider] = useState<Provider>(providers[0]) // pfee 默认修改为 providers[1] acfx
   const { t } = useTranslation()
-  const [searchText, setSearchText] = useState<string>('winload') // pfee 默认搜索为winload
+  const [searchText, setSearchText] = useState<string>('') // pfee 默认搜索为winload
   const [dragging, setDragging] = useState(false)
 
   const onDragEnd = (result: DropResult) => {

@@ -12,8 +12,8 @@ import {
   ThunderboltOutlined
 } from '@ant-design/icons'
 import { Navbar, NavbarCenter } from '@renderer/components/app/Navbar'
+import { isAboutShow, isAcfxMinAppShow, isMcpShow } from '@renderer/config/acfx-progressive'
 import { isLocalAi } from '@renderer/config/env'
-import { isAboutShow, isAcfxMinAppShow, isMcpShow } from '@renderer/config/winload-progressive'
 import { useSidebarIconShow } from '@renderer/hooks/useSidebarIcon'
 import ModelSettings from '@renderer/pages/settings/ModelSettings/ModelSettings'
 // 导入useAppSelector
@@ -39,7 +39,7 @@ const SettingsPage: FC = () => {
   const { pathname } = useLocation()
   const { t } = useTranslation()
 
-  const showMiniAppSettings = isAcfxMinAppShow && useSidebarIconShow('minapp') // pfee 隐藏设置页面小程序
+  const showMiniAppSettings = useSidebarIconShow('minapp') && isAcfxMinAppShow // pfee小程序 隐藏设置页面
 
   const isRoute = (path: string): string => (pathname.startsWith(path) ? 'active' : '')
 

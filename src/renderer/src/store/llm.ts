@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { ACFX_MODELS, AXFC_PROVIDER } from '@renderer/config/acfx-progressive'
 import { isLocalAi } from '@renderer/config/env'
 import { SYSTEM_MODELS } from '@renderer/config/models'
-import { winloadProvider } from '@renderer/config/winload-progressive'
 import { Model, Provider } from '@renderer/types'
 import { IpcChannel } from '@shared/IpcChannel'
 import { uniqBy } from 'lodash'
@@ -37,8 +37,6 @@ export const INITIAL_PROVIDERS: Provider[] = [
     isSystem: true,
     enabled: false // pfee 默认关闭硅基流动
   },
-  /* pfee 测试阶段，添加一个默认为winload的服务模型  */
-  winloadProvider,
   {
     id: 'aihubmix',
     name: 'AiHubMix',
@@ -484,14 +482,10 @@ export const INITIAL_PROVIDERS: Provider[] = [
 ]
 
 const initialState: LlmState = {
-  // defaultModel: SYSTEM_MODELS.silicon[1],
-  // topicNamingModel: SYSTEM_MODELS.silicon[2],
-  // translateModel: SYSTEM_MODELS.silicon[3],
-  /* pfee修改默认模型为winload */
-  defaultModel: winloadProvider.models[2],
-  topicNamingModel: winloadProvider.models[2],
-  translateModel: winloadProvider.models[3],
-  providers: INITIAL_PROVIDERS,
+  defaultModel: ACFX_MODELS[1], // pfee修改默认模型为axcfx
+  topicNamingModel: ACFX_MODELS[1], // pfee修改默认模型为axcfx
+  translateModel: ACFX_MODELS[1], // pfee修改默认模型为axcfx
+  providers: [AXFC_PROVIDER],
   settings: {
     ollama: {
       keepAliveTime: 0

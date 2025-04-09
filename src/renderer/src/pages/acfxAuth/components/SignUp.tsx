@@ -1,5 +1,5 @@
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
-import { EXPAND_CONFIG } from '@renderer/config/env'
+import { ACFX_CONFIG } from '@renderer/config/env'
 import { defHttp } from '@renderer/utils/http/axios'
 import { Button, ConfigProvider, Flex, Form, FormProps, Input, notification } from 'antd'
 import React, { useEffect, useState } from 'react'
@@ -62,7 +62,7 @@ const SignUp: React.FC<SignUpProps> = ({ setSignupVisible }) => {
     codeTimer = setInterval(() => setTime((t) => --t), 1000)
     //发送验证码的函数
     await defHttp.post({
-      url: EXPAND_CONFIG.AuthApi.getCaptcha,
+      url: ACFX_CONFIG.AuthApi.getCaptcha,
       data: {
         mobile: mobile,
         type: SmsEnum.REGISTER
@@ -75,7 +75,7 @@ const SignUp: React.FC<SignUpProps> = ({ setSignupVisible }) => {
       setLoading(true)
       notificationApi.destroy()
       const resultInfo = await defHttp.post({
-        url: EXPAND_CONFIG.AuthApi.register,
+        url: ACFX_CONFIG.AuthApi.register,
         data: values
       })
       if (resultInfo && resultInfo.data.success) {

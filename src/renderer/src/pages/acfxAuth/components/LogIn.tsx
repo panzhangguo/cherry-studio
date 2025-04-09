@@ -1,5 +1,5 @@
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
-import { EXPAND_CONFIG } from '@renderer/config/env'
+import { ACFX_CONFIG } from '@renderer/config/env'
 import { useExpandAuth } from '@renderer/hooks/useExpandAuth'
 import { defHttp } from '@renderer/utils/http/axios'
 import { Button, ConfigProvider, Divider, Form, FormProps, Input, message } from 'antd'
@@ -34,7 +34,7 @@ const LogIn: React.FC<SignUpProps> = ({ setSignupVisible }) => {
 
     const signInRes = await defHttp
       .post({
-        url: EXPAND_CONFIG.AuthApi.login,
+        url: ACFX_CONFIG.AuthApi.login,
         data: {
           username: values.username,
           password: values.password

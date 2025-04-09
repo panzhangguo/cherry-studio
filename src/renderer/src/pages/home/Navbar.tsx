@@ -3,6 +3,7 @@ import { Navbar, NavbarLeft, NavbarRight } from '@renderer/components/app/Navbar
 import { HStack } from '@renderer/components/Layout'
 import MinAppsPopover from '@renderer/components/Popups/MinAppsPopover'
 import SearchPopup from '@renderer/components/Popups/SearchPopup'
+import { isAcfxMinAppShow } from '@renderer/config/acfx-progressive'
 import { isMac } from '@renderer/config/constant'
 import { useAssistant } from '@renderer/hooks/useAssistant'
 import { modelGenerating } from '@renderer/hooks/useRuntime'
@@ -96,7 +97,8 @@ const HeaderNavbar: FC<Props> = ({ activeAssistant }) => {
               <i className="iconfont icon-icon-adaptive-width"></i>
             </NarrowIcon>
           </Tooltip>
-          {sidebarIcons.visible.includes('minapp') && (
+          {/* pfee小程序 顶部隐藏 */}
+          {isAcfxMinAppShow && sidebarIcons.visible.includes('minapp') && (
             <MinAppsPopover>
               <Tooltip title={t('minapp.title')} mouseEnterDelay={0.8}>
                 <NarrowIcon>

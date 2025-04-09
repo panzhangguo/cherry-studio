@@ -1,5 +1,5 @@
 import { SyncOutlined } from '@ant-design/icons'
-import { isShowUpdateAvailable } from '@renderer/config/winload-progressive'
+import { isShowUpdateAvailable } from '@renderer/config/acfx-progressive'
 import { useRuntime } from '@renderer/hooks/useRuntime'
 import { Button } from 'antd'
 import { FC } from 'react'

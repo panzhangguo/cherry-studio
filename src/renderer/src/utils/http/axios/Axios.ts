@@ -1,4 +1,4 @@
-import { EXPAND_CONFIG } from '@renderer/config/env'
+import { ACFX_CONFIG } from '@renderer/config/env'
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import axios from 'axios'
 import { cloneDeep, isFunction } from 'lodash'
@@ -126,7 +126,7 @@ export class VAxios {
       formData.append(customFilename, params.file)
     }
 
-    config.baseURL = EXPAND_CONFIG.API_URL
+    config.baseURL = ACFX_CONFIG.API_URL
     if (params.data) {
       Object.keys(params.data).forEach((key) => {
         const value = params.data![key]
