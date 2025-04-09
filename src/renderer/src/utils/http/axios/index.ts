@@ -132,7 +132,7 @@ const transform: AxiosTransform = {
   /**
    * @description: 请求拦截器处理
    */
-  requestInterceptors: async (config: Recordable, options) => {
+  requestInterceptors: async (config: Recordable) => {
     // 请求之前处理config
     config.headers['New-Api-User'] = await getAxfxUserId()
     // 添加一个标记，用于判断是否是AI Studio加载的

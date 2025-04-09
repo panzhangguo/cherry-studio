@@ -30,36 +30,36 @@ export const winloadProvider = {
   apiKey: '',
   apiHost: 'http://47.96.16.65:3000',
   models: [
-    {
-      id: 'deepseek-ai/DeepSeek-R1',
-      name: 'deepseek-ai/DeepSeek-R1',
-      provider: 'winload',
-      group: 'deepseek-ai'
-    },
-    {
-      id: 'deepseek-ai/DeepSeek-V3',
-      name: 'deepseek-ai/DeepSeek-V3',
-      provider: 'winload',
-      group: 'deepseek-ai'
-    },
-    {
-      id: 'Qwen/Qwen2.5-7B-Instruct',
-      provider: 'winload',
-      name: 'Qwen2.5-7B-Instruct',
-      group: 'Qwen'
-    },
-    {
-      id: 'meta-llama/Llama-3.3-70B-Instruct',
-      name: 'meta-llama/Llama-3.3-70B-Instruct',
-      provider: 'winload',
-      group: 'meta-llama'
-    },
-    {
-      id: 'BAAI/bge-m3',
-      name: 'BAAI/bge-m3',
-      provider: 'winload',
-      group: 'BAAI'
-    }
+    // {
+    //   id: 'deepseek-ai/DeepSeek-R1',
+    //   name: 'deepseek-ai/DeepSeek-R1',
+    //   provider: 'winload',
+    //   group: 'deepseek-ai'
+    // },
+    // {
+    //   id: 'deepseek-ai/DeepSeek-V3',
+    //   name: 'deepseek-ai/DeepSeek-V3',
+    //   provider: 'winload',
+    //   group: 'deepseek-ai'
+    // },
+    // {
+    //   id: 'Qwen/Qwen2.5-7B-Instruct',
+    //   provider: 'winload',
+    //   name: 'Qwen2.5-7B-Instruct',
+    //   group: 'Qwen'
+    // },
+    // {
+    //   id: 'meta-llama/Llama-3.3-70B-Instruct',
+    //   name: 'meta-llama/Llama-3.3-70B-Instruct',
+    //   provider: 'winload',
+    //   group: 'meta-llama'
+    // },
+    // {
+    //   id: 'BAAI/bge-m3',
+    //   name: 'BAAI/bge-m3',
+    //   provider: 'winload',
+    //   group: 'BAAI'
+    // }
   ],
   isSystem: true,
   enabled: true
