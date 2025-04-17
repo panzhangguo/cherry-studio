@@ -122,7 +122,7 @@ const SignUp: React.FC<SignUpProps> = ({ setSignupVisible }) => {
           wrapperCol={{ flex: 1 }}
           colon={false}
           onFinish={onFinish}
-          style={{ maxWidth: 600 }}>
+          style={{ maxWidth: 700 }}>
           <Form.Item name="username" rules={[{ required: true, message: t('用户名不能为空') }]}>
             <Input autoFocus placeholder={t('用户名')} />
           </Form.Item>
@@ -182,7 +182,9 @@ const SignUp: React.FC<SignUpProps> = ({ setSignupVisible }) => {
               iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
             />
           </Form.Item>
-
+          <Form.Item name="username">
+            <Input autoFocus placeholder={t('团队码')} />
+          </Form.Item>
           <Form.Item style={{ marginBottom: '10px' }}>
             <ConfigProvider
               button={{

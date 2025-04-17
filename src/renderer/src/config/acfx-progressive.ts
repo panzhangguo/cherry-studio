@@ -29,13 +29,19 @@ export const ACFX_MODELS = [
     id: 'deepseek-v3',
     name: 'deepseek-v3',
     provider: 'acfx',
-    group: 'deepseek-ai'
+    group: 'deepseek-v3'
   },
   {
     id: 'Doubao-embedding',
     name: 'Doubao-embedding',
     provider: 'acfx',
     group: 'Doubao-embedding'
+  },
+  {
+    id: 'BAAI/bge-m3',
+    name: 'BAAI/bge-m3',
+    provider: 'acfx',
+    group: 'BAAI'
   }
 ]
 

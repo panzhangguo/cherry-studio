@@ -52,7 +52,7 @@ const Content = styled.div`
   justify-content: center;
 `
 const Center = styled.div`
-  width: 350px;
+  width: 400px;
   height: 400px;
   display: flex;
   flex-direction: column;

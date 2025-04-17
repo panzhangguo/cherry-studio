@@ -17,9 +17,9 @@ import ProviderSetting from './ProviderSetting'
 const ProvidersList: FC = () => {
   const providers = useAllProviders()
   const { updateProviders, addProvider, removeProvider, updateProvider } = useProviders()
-  const [selectedProvider, setSelectedProvider] = useState<Provider>(providers[0]) // pfee 默认修改为 providers[1] acfx
+  const [selectedProvider, setSelectedProvider] = useState<Provider>(providers[0])
   const { t } = useTranslation()
-  const [searchText, setSearchText] = useState<string>('') // pfee 默认搜索为winload
+  const [searchText, setSearchText] = useState<string>('')
   const [dragging, setDragging] = useState(false)
 
   const onDragEnd = (result: DropResult) => {

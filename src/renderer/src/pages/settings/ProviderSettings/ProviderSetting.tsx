@@ -14,10 +14,10 @@ import { isProviderSupportAuth, isProviderSupportCharge } from '@renderer/servic
 import { Provider } from '@renderer/types'
 import { formatApiHost } from '@renderer/utils/api'
 import { providerCharge } from '@renderer/utils/oauth'
-import { Button, Divider, Flex, Input, Space, Switch, Tooltip } from 'antd'
+import { Button, Divider, Flex, Input, InputRef, Space, Switch, Tooltip } from 'antd'
 import Link from 'antd/es/typography/Link'
 import { debounce, isEmpty } from 'lodash'
-import { FC, useCallback, useDeferredValue, useEffect, useState } from 'react'
+import { FC, useCallback, useDeferredValue, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 
@@ -29,6 +29,7 @@ import {
   SettingSubtitle,
   SettingTitle
 } from '..'
+import AcfxApiContent from './AcfxApiContent'
 import ApiCheckPopup from './ApiCheckPopup'
 import GithubCopilotSettings from './GithubCopilotSettings'
 import GPUStackSettings from './GPUStackSettings'
@@ -256,6 +257,26 @@ const ProviderSetting: FC<Props> = ({ provider: _provider }) => {
     return formatApiHost(apiHost) + 'chat/completions'
   }
 
+  /* pfee acfx */
+  const apiInputRef = useRef<InputRef>(null)
+  const addAcfxKey = (key: string, addable: boolean) => {
+    let newKey = ''
+    if (addable) {
+      newKey = formatApiKeys((apiKey ? apiKey + ',' : '') + key)
+    } else {
+      newKey = apiKey
+        .split(',')
+        .filter((k) => k !== key)
+        .join()
+    }
+    setInputValue(newKey)
+    debouncedSetApiKey(newKey)
+    apiInputRef.current!.focus({
+      cursor: 'end'
+    })
+  }
+  /* pfee acfx */
+
   useEffect(() => {
     if (provider.id === 'copilot') {
       return
@@ -298,9 +319,15 @@ const ProviderSetting: FC<Props> = ({ provider: _provider }) => {
         />
       </SettingTitle>
       <Divider style={{ width: '100%', margin: '10px 0' }} />
+      {/* pfee acfx api */}
+      {provider.id === 'acfx' && (
+        <AcfxApiContent apiKey={apiKey} addAcfxKey={(key: string, addable: boolean) => addAcfxKey(key, addable)} />
+      )}
+      {/* pfee acfx api */}
       <SettingSubtitle style={{ marginTop: 5 }}>{t('settings.provider.api_key')}</SettingSubtitle>
       <Space.Compact style={{ width: '100%', marginTop: 5 }}>
         <Input.Password
+          ref={apiInputRef} // pfee api输入框ref
           value={inputValue}
           placeholder={t('settings.provider.api_key')}
           onChange={(e) => {

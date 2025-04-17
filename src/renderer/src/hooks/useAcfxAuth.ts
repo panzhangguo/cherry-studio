@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@renderer/store'
-import { setAcfxSessionTimeOut, setAcfxUser } from '@renderer/store/axfcAuth'
 import type { AcfxUserInfo } from '@renderer/store/axfcAuth'
-export function useExpandAuth() {
+import { setAcfxSessionTimeOut, setAcfxUser } from '@renderer/store/axfcAuth'
+export function useAcfxAuth() {
   const user = useAppSelector((state) => state.axfcAuth.user)
   const isLogin = useAppSelector((state) => state.axfcAuth.isSessionTimeOut === false)
   const dispatch = useAppDispatch()

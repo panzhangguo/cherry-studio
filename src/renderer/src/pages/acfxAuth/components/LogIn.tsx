@@ -1,6 +1,6 @@
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
 import { ACFX_CONFIG } from '@renderer/config/env'
-import { useExpandAuth } from '@renderer/hooks/useExpandAuth'
+import { useAcfxAuth } from '@renderer/hooks/useAcfxAuth'
 import { defHttp } from '@renderer/utils/http/axios'
 import { Button, ConfigProvider, Divider, Form, FormProps, Input, message } from 'antd'
 import React, { useState } from 'react'
@@ -22,7 +22,7 @@ const LogIn: React.FC<SignUpProps> = ({ setSignupVisible }) => {
   const [isLogining, setLogining] = useState(false)
   const [messageApi, contextHolder] = message.useMessage()
   const navigate = useNavigate()
-  const { login, user } = useExpandAuth()
+  const { login, user } = useAcfxAuth()
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     setLogining(true)
     messageApi.open({

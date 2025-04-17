@@ -1,8 +1,8 @@
 import { QuestionCircleOutlined } from '@ant-design/icons' // pfee 引入auth模块
 import DefaultAvatar from '@renderer/assets/images/avatar.png'
 import { ACFX_CONFIG } from '@renderer/config/env'
+import { useAcfxAuth } from '@renderer/hooks/useAcfxAuth' // pfee 引入auth模块
 import useAvatar from '@renderer/hooks/useAvatar'
-import { useExpandAuth } from '@renderer/hooks/useExpandAuth' // pfee 引入auth模块
 import { useSettings } from '@renderer/hooks/useSettings'
 import ImageStorage from '@renderer/services/ImageStorage'
 import { useAppDispatch } from '@renderer/store'
@@ -34,7 +34,7 @@ const PopupContainer: React.FC<Props> = ({ resolve }) => {
   const avatar = useAvatar()
   /* pfee 引入auth模块 */
   const navigate = useNavigate()
-  const { logout: authLogout, isLogin, user } = useExpandAuth()
+  const { logout: authLogout, isLogin, user } = useAcfxAuth()
   const toAuth = async (isSignup = false) => {
     if (!isSignup && isLogin) {
       await defHttp.get({
