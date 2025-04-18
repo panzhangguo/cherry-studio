@@ -179,7 +179,7 @@ const DisplaySettings: FC = () => {
           setDisabledIcons={setDisabledIcons}
         />
       </SettingGroup>
-      {/* pfee小程序 隐藏设置 和 自定义css设置 */}
+      {/* pfee自定义css设置 隐藏设置 */}
       <SettingGroup theme={theme} style={{ display: isCustomCssShow ? 'block' : 'none' }}>
         <SettingTitle>
           {t('settings.display.custom.css')}
@@ -201,7 +201,7 @@ const DisplaySettings: FC = () => {
           }}
         />
       </SettingGroup>
-      {/* pfee程序 隐藏小设置 和 自定义css设置 */}
+      {/* pfee自定义css设置 隐藏设置 */}
     </SettingContainer>
   )
 }

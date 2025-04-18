@@ -1,4 +1,4 @@
-import { isAcfxMinAppShow, isDocsShow } from '@renderer/config/acfx-progressive'
+import { isDocsShow } from '@renderer/config/acfx-progressive'
 import { isMac } from '@renderer/config/constant'
 import { AppLogo, UserAvatar } from '@renderer/config/env'
 import { useTheme } from '@renderer/context/ThemeProvider'
@@ -92,7 +92,10 @@ const Sidebar: FC = () => {
         {/* pfee 关闭帮助文旦链接 */}
         {isDocsShow && (
           <Tooltip title={t('docs.title')} mouseEnterDelay={0.8} placement="right">
-            <Icon theme={theme} onClick={onOpenDocs} className={minappShow && currentMinappId === docsId ? 'active' : ''}>
+            <Icon
+              theme={theme}
+              onClick={onOpenDocs}
+              className={minappShow && currentMinappId === docsId ? 'active' : ''}>
               <CircleHelp size={20} className="icon" />
             </Icon>
           </Tooltip>
@@ -154,27 +157,25 @@ const MainMenus: FC = () => {
     files: '/files'
   }
 
-  return sidebarIcons.visible
-    .filter((icon) => (icon === 'minapp' ? isAcfxMinAppShow : true)) // pfee小程序 隐藏
-    .map((icon) => {
-      const path = pathMap[icon]
-      const isActive = path === '/' ? isRoute(path) : isRoutes(path)
+  return sidebarIcons.visible.map((icon) => {
+    const path = pathMap[icon]
+    const isActive = path === '/' ? isRoute(path) : isRoutes(path)
 
-      return (
-        <Tooltip key={icon} title={t(`${icon}.title`)} mouseEnterDelay={0.8} placement="right">
-          <StyledLink
-            onClick={async () => {
-              hideMinappPopup()
-              await modelGenerating()
-              navigate(path)
-            }}>
-            <Icon theme={theme} className={isActive}>
-              {iconMap[icon]}
-            </Icon>
-          </StyledLink>
-        </Tooltip>
-      )
-    })
+    return (
+      <Tooltip key={icon} title={t(`${icon}.title`)} mouseEnterDelay={0.8} placement="right">
+        <StyledLink
+          onClick={async () => {
+            hideMinappPopup()
+            await modelGenerating()
+            navigate(path)
+          }}>
+          <Icon theme={theme} className={isActive}>
+            {iconMap[icon]}
+          </Icon>
+        </StyledLink>
+      </Tooltip>
+    )
+  })
 }
 
 /** Tabs of opened minapps in sidebar */

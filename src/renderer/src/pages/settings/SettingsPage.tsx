@@ -1,6 +1,5 @@
 import { Navbar, NavbarCenter } from '@renderer/components/app/Navbar'
-import { isAboutShow, isAcfxMinAppShow, isMcpShow } from '@renderer/config/acfx-progressive'
-import { isLocalAi } from '@renderer/config/env'
+import { isAboutShow, isMcpShow } from '@renderer/config/acfx-progressive'
 import { useSidebarIconShow } from '@renderer/hooks/useSidebarIcon'
 import ModelSettings from '@renderer/pages/settings/ModelSettings/ModelSettings'
 import {
@@ -40,7 +39,7 @@ const SettingsPage: FC = () => {
   const { pathname } = useLocation()
   const { t } = useTranslation()
 
-  const showMiniAppSettings = useSidebarIconShow('minapp') && isAcfxMinAppShow // pfee小程序 隐藏设置页面
+  const showMiniAppSettings = useSidebarIconShow('minapp')
 
   const isRoute = (path: string): string => (pathname.startsWith(path) ? 'active' : '')
 
