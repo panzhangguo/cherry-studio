@@ -44,7 +44,7 @@ const rootReducer = combineReducers({
 export const persistConfig = {
   key: 'acfx',
   storage,
-  version: 92,
+  version: 96,
   blacklist: ['runtime', 'messages'],
   migrate
 }

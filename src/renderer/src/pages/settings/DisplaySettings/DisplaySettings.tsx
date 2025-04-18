@@ -5,7 +5,9 @@ import { useTheme } from '@renderer/context/ThemeProvider'
 import { useSettings } from '@renderer/hooks/useSettings'
 import { useAppDispatch } from '@renderer/store'
 import {
+  AssistantIconType,
   DEFAULT_SIDEBAR_ICONS,
+  setAssistantIconType,
   setClickAssistantToShowTopic,
   setCustomCss,
   setShowTopicTime,
@@ -32,8 +34,7 @@ const DisplaySettings: FC = () => {
     showTopicTime,
     customCss,
     sidebarIcons,
-    showAssistantIcon,
-    setShowAssistantIcon
+    assistantIconType
   } = useSettings()
   const { theme: themeMode } = useTheme()
   const { t } = useTranslation()
@@ -84,6 +85,15 @@ const DisplaySettings: FC = () => {
           </div>
         )
       }
+    ],
+    [t]
+  )
+
+  const assistantIconTypeOptions = useMemo(
+    () => [
+      { value: 'model', label: t('settings.assistant.icon.type.model') },
+      { value: 'emoji', label: t('settings.assistant.icon.type.emoji') },
+      { value: 'none', label: t('settings.assistant.icon.type.none') }
     ],
     [t]
   )
@@ -144,8 +154,13 @@ const DisplaySettings: FC = () => {
         <SettingTitle>{t('settings.display.assistant.title')}</SettingTitle>
         <SettingDivider />
         <SettingRow>
-          <SettingRowTitle>{t('settings.assistant.show.icon')}</SettingRowTitle>
-          <Switch checked={showAssistantIcon} onChange={(checked) => setShowAssistantIcon(checked)} />
+          <SettingRowTitle>{t('settings.assistant.icon.type')}</SettingRowTitle>
+          <Segmented
+            value={assistantIconType}
+            shape="round"
+            onChange={(value) => dispatch(setAssistantIconType(value as AssistantIconType))}
+            options={assistantIconTypeOptions}
+          />
         </SettingRow>
       </SettingGroup>
       <SettingGroup theme={theme}>
