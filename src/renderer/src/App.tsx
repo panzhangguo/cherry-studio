@@ -12,9 +12,9 @@ import StyleSheetManager from './context/StyleSheetManager'
 import { SyntaxHighlighterProvider } from './context/SyntaxHighlighterProvider'
 import { ThemeProvider } from './context/ThemeProvider'
 import NavigationHandler from './handler/NavigationHandler'
+import AcfxAuthPage from './pages/acfxAuth/AcfxAuthPage' // pfee 引入auth模块
 import AgentsPage from './pages/agents/AgentsPage'
 import AppsPage from './pages/apps/AppsPage'
-import AcfxAuthPage from './pages/acfxAuth/AcfxAuthPage' // pfee 引入auth模块
 import FilesPage from './pages/files/FilesPage'
 import HomePage from './pages/home/HomePage'
 import KnowledgePage from './pages/knowledge/KnowledgePage'
