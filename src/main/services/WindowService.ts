@@ -28,7 +28,7 @@ export class WindowService {
   private cookiesStore: Record<string, string> = {}
   // 拦截响应头并处理 Set-Cookie
   private cookieFilter = {
-    urls: ['http://127.0.0.1:3000/api/*', 'http://localhost:3000/api/*', 'http://111.231.8.34:3000/api/*']
+    urls: ['http://127.0.0.1:3000/api/*', 'http://10.16.2.185:3000/api/*', 'http://47.96.16.65:3000/api/*']
   }
 
   public static getInstance(): WindowService {

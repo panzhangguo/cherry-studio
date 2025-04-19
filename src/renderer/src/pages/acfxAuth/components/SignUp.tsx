@@ -114,7 +114,7 @@ const SignUp: React.FC<SignUpProps> = ({ setSignupVisible }) => {
       <Container>
         <Title>{t('欢迎注册')}</Title>
         <Form
-          name="wrap"
+          name="register"
           form={form}
           labelCol={{ flex: '110px' }}
           labelAlign="left"

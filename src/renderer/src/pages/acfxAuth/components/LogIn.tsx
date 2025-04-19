@@ -59,7 +59,7 @@ const LogIn: React.FC<SignUpProps> = ({ setSignupVisible }) => {
       <Container>
         <Title>{t('欢迎使用')}</Title>
         <Form
-          name="wrap"
+          name="login"
           labelCol={{ flex: '110px' }}
           labelAlign="left"
           labelWrap
@@ -107,6 +107,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
 `
 const Title = styled.h2`
   font-size: 20px;

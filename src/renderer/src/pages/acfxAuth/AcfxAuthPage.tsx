@@ -1,4 +1,3 @@
-import authBg from '@renderer/assets/images/expand/auth-bg.svg'
 import { Navbar, NavbarCenter } from '@renderer/components/app/Navbar'
 import { APP_NAME } from '@renderer/config/env'
 import { type FC, useState } from 'react'
@@ -7,7 +6,7 @@ import styled from 'styled-components'
 
 import LogIn from './components/LogIn'
 import SignUp from './components/SignUp'
-const LoginPage: FC = () => {
+const AcfxAuthPage: FC = () => {
   const { state } = useLocation()
   const _state = state || { isSignup: false }
 
@@ -18,6 +17,7 @@ const LoginPage: FC = () => {
       <Navbar>
         <NavbarCenter style={{ borderRight: 'none' }}>注册 {APP_NAME}</NavbarCenter>
       </Navbar>
+      <AuthContainerBg></AuthContainerBg>
       <Content>
         <Center>
           <Title>{APP_NAME}</Title>
@@ -32,32 +32,40 @@ const LoginPage: FC = () => {
   )
 }
 
-const AuthContainer = styled.div`
+const FlexCenter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`
+const AuthContainer = styled(FlexCenter)`
+  position: relative;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   background-color: var(--color-background);
-  background-image: url(${authBg});
-  background-size: cover;
 `
 
-const Content = styled.div`
+const AuthContainerBg = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  background: linear-gradient(154deg, #07070915 30%, hsl(212, 100%, 45%, 20%) 48%, #07070915 64%);
+  filter: blur(100px);
 `
-const Center = styled.div`
+
+const Content = styled(FlexCenter)`
+  width: 100%;
+  height: 100%;
+`
+
+const Center = styled(FlexCenter)`
   width: 400px;
   height: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  margin-top: -60px;
 `
 const Title = styled.h1`
   font-size: 28px;
@@ -66,4 +74,4 @@ const Title = styled.h1`
   margin-bottom: 22px;
 `
 
-export default LoginPage
+export default AcfxAuthPage
