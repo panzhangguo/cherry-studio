@@ -12,10 +12,10 @@ import { countdown, SmsEnum } from '../useLogin'
 
 type FieldType = {
   username?: string
-  phone?: string
+  mobile_phone?: string
   password?: string
   confirm_password?: string
-  code?: string
+  verification_code?: string
 }
 
 let codeTimer: NodeJS.Timeout
@@ -32,7 +32,7 @@ const SignUp: React.FC<SignUpProps> = ({ setSignupVisible }) => {
   const [btnContent, setBtnContent] = useState('获取验证码')
   // username: data.account,
   // password: data.password,
-  // phone: data.mobile,
+  // mobile_phone: data.mobile_phone,
   // smscode: data.sms,
   const [form] = Form.useForm()
   useEffect(() => {
@@ -52,7 +52,7 @@ const SignUp: React.FC<SignUpProps> = ({ setSignupVisible }) => {
   }, [time])
 
   const getCode = async () => {
-    const mobile = form.getFieldValue('phone')
+    const mobile = form.getFieldValue('mobile_phone')
     if (!mobile) {
       window.message.error('请输入手机号')
       return
@@ -61,10 +61,10 @@ const SignUp: React.FC<SignUpProps> = ({ setSignupVisible }) => {
     setCodeVisible(false)
     codeTimer = setInterval(() => setTime((t) => --t), 1000)
     //发送验证码的函数
-    await defHttp.post({
+    await defHttp.get({
       url: ACFX_CONFIG.AuthApi.getCaptcha,
-      data: {
-        mobile: mobile,
+      params: {
+        mobile_phone: mobile,
         type: SmsEnum.REGISTER
       }
     })
@@ -127,7 +127,7 @@ const SignUp: React.FC<SignUpProps> = ({ setSignupVisible }) => {
             <Input autoFocus placeholder={t('用户名')} />
           </Form.Item>
           <Form.Item
-            name="phone"
+            name="mobile_phone"
             rules={[
               { required: true, message: t('	手机号码不能为空') },
               {
@@ -138,7 +138,7 @@ const SignUp: React.FC<SignUpProps> = ({ setSignupVisible }) => {
             <Input placeholder={t('手机号码')} />
           </Form.Item>
 
-          <Form.Item name="smscode" rules={[{ required: true, message: t('验证码格式错误') }]}>
+          <Form.Item name="verification_code" rules={[{ required: true, message: t('验证码格式错误') }]}>
             <Flex gap={10}>
               <Input placeholder={t('验证码')} className="flex-1" />
               <ConfigProvider
@@ -182,9 +182,9 @@ const SignUp: React.FC<SignUpProps> = ({ setSignupVisible }) => {
               iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
             />
           </Form.Item>
-          <Form.Item name="username">
+          {/* <Form.Item name="username">
             <Input autoFocus placeholder={t('团队码')} />
-          </Form.Item>
+          </Form.Item> */}
           <Form.Item style={{ marginBottom: '10px' }}>
             <ConfigProvider
               button={{
